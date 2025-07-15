@@ -105,6 +105,7 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center; /* وسط‌چین کردن */
+  padding-bottom: 80px;
 }
 
 
@@ -135,11 +136,12 @@ h3 {
       <li>کار گروهی و یادگیری تعامل مؤثر با دیگران</li>
     </ul>
 
-    <div style="text-align: center; margin: 40px 0 60px 0;">
+    <div style="text-align: center; margin: 25px 0;">
+      <img src="images/img1.jpg" alt="کودکان در حال بازی ماینکرافت" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    </div>
+
+    <div style="text-align: center; margin: 40px 0 40px 0;">
       <hr style="border: none; height: 2px; background-color: #c8e6c9; width: 80%;">
-      <span style="display: inline-block; margin-top: 20px; background-color: #fff; padding: 0 15px; color: #2e7d32; font-weight: bold; font-size: 18px;">
-        شرایط شرکت در کلاس‌ها
-      </span>
     </div>
   
     <h3>نیازمندی‌های شرکت در کلاس:</h3>
@@ -164,10 +166,21 @@ h3 {
       ۳- کلاس‌ها متناسب با سطح سنی و تجربه‌ی بچه‌ها برگزار می‌شوند.
     </div>
     
+    <div style="background-color: #e3f2fd; color: #0d47a1; border: 1px solid #90caf9; padding: 15px; border-radius: 8px; margin-bottom: 30px; line-height: 1.8;">
+      <strong>نحوه برگزاری کلاس‌ها:</strong><br>
+      ۱- کلاس‌ها در روز پنج‌شنبه برگزار می‌گردند.<br>
+      ۲- مدت زمان هر کلاس ۲ ساعت می‌باشد.<br>
+      <strong>آدرس:</strong> بین عدالت ۶۷ و ۶۵، مجتمع اهورا، طبقه اول.
+    </div>
+
+    <p style="text-align: center; color: #555; margin-bottom: 25px; font-size: 16px;">
+      جهت ثبت‌نام لطفاً فیلدهای زیر را با دقت پر کرده و سپس روی دکمه <strong>ثبت‌نام</strong> کلیک کنید.
+    </p>
   
     <!-- فرم ثبت‌نام همون قبلی -->
     <form>
-      <input type="text" name="fullname" placeholder="نام و نام خانوادگی" required>
+      <input type="text" name="parent_name" placeholder="نام و نام خانوادگی پدر یا مادر" required>
+      <input type="text" name="child_name" placeholder="نام فرزند" required>
       <input type="tel" name="phone" placeholder="شماره تماس" required>
       <button type="submit">ثبت‌نام</button>
     </form>
