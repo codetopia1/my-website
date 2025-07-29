@@ -243,10 +243,10 @@ h3 {
     
   
     <!-- فرم ثبت‌نام همون قبلی -->
-    <form id="registerForm">
-      <input type="text" name="parent_name" placeholder="نام و نام خانوادگی پدر یا مادر" required>
-      <input type="text" name="child_name" placeholder="نام فرزند" required>
-      <input type="tel" name="phone" placeholder="شماره تماس" required 
+    <form id="registrationForm">
+      <input type="text" id="parentName" placeholder="نام و نام خانوادگی پدر یا مادر" required>
+      <input type="text" id="childName" placeholder="نام فرزند" required>
+      <input type="tel" id="phone" placeholder="شماره تماس" required 
        pattern="[0-9]{11}" 
        inputmode="numeric" 
        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -254,6 +254,8 @@ h3 {
       <button type="submit">ثبت‌نام</button>
     </form>
   </div>
+
+  <p id="statusMsg"></p>
   
 
 </body>
@@ -268,71 +270,42 @@ h3 {
 </script>
 
 <script>
-
-
-  document.getElementById('registerForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-
-  const parentName = document.querySelector('input[name="parent_name"]').value.trim();
-  const childName = document.querySelector('input[name="child_name"]').value.trim();
-  const phone = document.querySelector('input[name="phone"]').value.trim();
-
-  const newEntry = `نام والد: ${parentName} | نام فرزند: ${childName} | شماره تماس: ${phone}\n`;
-
-  const token = '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';  // ⚠️ توکن خود را اینجا قرار دهید
-  const apiUrl = 'https://api.github.com/repos/codetopia1/my-website/contents/Registrant-information';
-
-  try {
-    // مرحله 1: دریافت محتوای فعلی فایل
-    const getRes = await fetch(apiUrl, {
-      headers: {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    });
-
-    if (!getRes.ok) throw new Error('خطا در دریافت فایل');
-
-    const fileData = await getRes.json();
-    const oldContent = decodeFromBase64(fileData.content);
-    const updatedContent = oldContent + newEntry;
-    const encodedContent = encodeToBase64(updatedContent);
-
-    // مرحله 2: آپدیت فایل با محتوای جدید
-    const putRes = await fetch(apiUrl, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json'
-      },
-      body: JSON.stringify({
-        message: 'ثبت‌نام جدید',
-        content: encodedContent,
-        sha: fileData.sha
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('registrationForm');
+    const statusMsg = document.getElementById('statusMsg');
+  
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxeaWdjmSLnf0M7K22YG2ZdRriAeZ4PpJra_DHqTMVcMnhn-44Eb0pIIZ2DB713XA07/exec'; // لینک صحیح Web App
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+  
+      const formData = new FormData(form);
+  
+      // نمایش وضعیت
+      statusMsg.textContent = 'در حال ارسال اطلاعات...';
+      statusMsg.style.color = '#555';
+  
+      fetch(scriptURL, {
+        method: 'POST',
+        body: formData // بدون JSON، CORS ندارد
       })
+      .then(response => {
+        if (response.ok) {
+          statusMsg.textContent = '✅ ثبت‌نام با موفقیت انجام شد.';
+          statusMsg.style.color = 'green';
+          form.reset();
+        } else {
+          throw new Error('خطا در ارسال');
+        }
+      })
+      .catch(error => {
+        console.error('خطا:', error);
+        statusMsg.textContent = '❌ خطا در اتصال به سرور.';
+        statusMsg.style.color = 'red';
+      });
     });
-
-    if (!putRes.ok) throw new Error('خطا در به‌روزرسانی فایل');
-
-    alert('✅ ثبت‌نام با موفقیت انجام شد!');
-    document.getElementById('registerForm').reset();
-
-  } catch (err) {
-    console.error(err);
-    alert('❌ خطا در ثبت‌نام! لطفاً دوباره تلاش کنید.');
-  }
-});
-
-// توابع رمزگذاری و رمزگشایی با پشتیبانی کامل فارسی (UTF-8)
-function encodeToBase64(str) {
-  return btoa(unescape(encodeURIComponent(str)));
-}
-
-function decodeFromBase64(str) {
-  return decodeURIComponent(escape(atob(str)));
-}
-
-
-</script>
+  });
+  </script>
+  
 
 </html>
