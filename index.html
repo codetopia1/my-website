@@ -278,24 +278,22 @@ h3 {
     const phone = document.getElementById("phone").value.trim();
     
     fetch("https://script.google.com/macros/s/AKfycbzudhTciwLARDgzeVF3z8NnEI1GWaPGrd9oRMkK5bIqUTmhJIBuggcL-C8BsiHepRzn/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        parentName: parentName,
-        childName: childName,
-        phone: phone
-      })
-    })
-    .then(response => response.text())
-    .then(result => {
-      alert("ثبت‌نام با موفقیت انجام شد!");
-      document.getElementById("registrationForm").reset();
-    })
-    .catch(error => {
-      console.error("Error:", error);
-      alert("مشکلی در ثبت‌نام پیش آمد.");
-    });
-  });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    parentName: "مثال پدر",
+    childName: "مثال فرزند",
+    phone: "09123456789"
+  })
+})
+.then(response => response.text())
+.then(result => {
+  console.log("پاسخ:", result);
+})
+.catch(error => {
+  console.error("خطا:", error);
+});
+
 </script>
 
 
