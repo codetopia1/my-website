@@ -274,20 +274,21 @@ h3 {
     const form = document.getElementById('registrationForm');
     const statusMsg = document.getElementById('statusMsg');
   
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyp74ooqlAzjVeUDUej3tRvUDa9N7CjMAUaraUpqvQ/dev'; // لینک صحیح Web App
+    const baseScriptURL = 'https://script.google.com/macros/s/AKfycbyp74ooqlAzjVeUDUej3tRvUDa9N7CjMAUaraUpqvQ/dev'; // Web App اصلی
   
     form.addEventListener('submit', e => {
       e.preventDefault();
   
       const formData = new FormData(form);
-  
-      // نمایش وضعیت
       statusMsg.textContent = 'در حال ارسال اطلاعات...';
       statusMsg.style.color = '#555';
   
-      fetch(scriptURL, {
+      // ایجاد URL بدون کش
+      const noCacheURL = baseScriptURL + '?nocache=' + new Date().getTime();
+  
+      fetch(noCacheURL, {
         method: 'POST',
-        body: formData // بدون JSON، CORS ندارد
+        body: formData
       })
       .then(response => {
         if (response.ok) {
@@ -305,7 +306,8 @@ h3 {
       });
     });
   });
-  </script>
+</script>
+
   
 
 </html>
