@@ -205,7 +205,7 @@ h3 {
     
     <div style="background-color: #e3f2fd; color: #0d47a1; border: 1px solid #90caf9; padding: 15px; border-radius: 8px; margin-bottom: 30px; line-height: 1.8;">
       <strong>نحوه برگزاری کلاس‌ها:</strong><br>
-      ۱- کلاس‌ها در روز پنج‌شنبه برگزار می‌گردند.<br>
+      ۱- کلاس‌ها در روز پنج‌شنبه و شنبه برگزار می‌گردند.<br>
       ۲- مدت زمان هر کلاس ۲ ساعت و ظرفیت هر کلاس 4 نفر می باشد<br>
       ۳- برای بازی از جدیدترین نسخه (1.21.8) استفاده می شود و برای اجرای مود ها از Fabric<br>
     </div>
@@ -217,10 +217,10 @@ h3 {
       <div class="accordion-content">
         <ul>
           <li>رعایت نظم و احترام به مربی و سایر شرکت‌کنندگان الزامی است.</li>
-          <li>بازی فقط در زمان تعیین‌شده انجام می‌شود، خارج از کلاس ممنوع است.</li>
-          <li>هر دانش‌آموز باید فقط از لپ‌تاپ خودش استفاده کند.</li>
-          <li>ضبط و انتشار تصاویر و ویدیوهای کلاس ممنوع است.</li>
-          <li>در صورت تخلف، با تذکر و در صورت تکرار، حذف از کلاس انجام می‌شود.</li>
+          <li>خراب کردن یا تغییر دادن ساخت‌وساز دیگران ممنوع است.</li>
+          <li>حمله به یازیکنان دیگر ممنوع است</li>
+          <li>به بازیکنانی که وظایف خود را انجام دهند با آیتم های کمیاب پاداش داده می شود</li>
+          <li>هر کسی قوانین را رعایت نکند، ممکن است از بازی محروم شود.</li>
         </ul>
       </div>
     </div>
@@ -237,25 +237,20 @@ h3 {
 </div>
 
     <p style="text-align: center; color: #555; margin-bottom: 25px; font-size: 16px;">
-      جهت ثبت‌نام لطفاً فیلدهای زیر را با دقت پر کرده و سپس روی دکمه <strong>ثبت‌نام</strong> کلیک کنید.
+      جهت ثبت‌نام لطفاً روی دکمه زیر بزنید و اطلاعات را کامل کنید
     </p>
 
     
   
-    <!-- فرم ثبت‌نام همون قبلی -->
-    <form id="registrationForm">
-      <input type="text" id="parentName" placeholder="نام و نام خانوادگی پدر یا مادر" required>
-      <input type="text" id="childName" placeholder="نام فرزند" required>
-      <input type="tel" id="phone" placeholder="شماره تماس" required 
-       pattern="[0-9]{11}" 
-       inputmode="numeric" 
-       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-       title="شماره باید 11 رقمی باشد">
-      <button type="submit">ثبت‌نام</button>
-    </form>
-  </div>
+    <div style="text-align: center; margin-top: 40px;">
+      <button onclick="window.open('https://digiform.ir/wa3ad917c', '_blank')">
+        ثبت‌نام
+      </button>
+    </div>
 
-  <p id="statusMsg"></p>
+    <p style="font-size: 12px; color: #666; margin-top: 105px; text-align: center;">
+      با تشکر آکادمی رباتیک گرگان
+    </p>
   
 
 </body>
@@ -268,37 +263,6 @@ h3 {
     content.style.display = content.style.display === 'block' ? 'none' : 'block';
   });
 </script>
-
-<script>
-  document.getElementById("registrationForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    const parentName = document.getElementById("parentName").value.trim();
-    const childName = document.getElementById("childName").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    
-    fetch("https://script.google.com/macros/s/AKfycbzudhTciwLARDgzeVF3z8NnEI1GWaPGrd9oRMkK5bIqUTmhJIBuggcL-C8BsiHepRzn/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        parentName: parentName,
-        childName: childName,
-        phone: phone
-      })
-    })
-    .then(response => response.text())
-    .then(result => {
-      console.log("پاسخ:", result);
-      alert("ثبت‌نام با موفقیت انجام شد!");
-      document.getElementById("registrationForm").reset();
-    })
-    .catch(error => {
-      console.error("خطا:", error);
-      alert("مشکلی در ثبت‌نام پیش آمد.");
-    });
-  });
-</script>
-
 
 
   
